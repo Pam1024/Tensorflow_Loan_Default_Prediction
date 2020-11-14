@@ -8,7 +8,7 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 
 ### For this project, we completed below tasks
 
-**1. Data Exploratoion :** Get an understanding for which variables are important, view summary statistics, and visualize the data 
+**1. Data Exploration :** Get an understanding for which variables are important, view summary statistics, and visualize the data 
 
 **2. Data PreProcessing :** Remove or fill any missing data. Remove unnecessary or repetitive features. Convert categorical string features to dummy variables
 
@@ -19,6 +19,7 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 **5. Model Performance Evaluation:** Plot out the validation loss versus the training loss, check precision,recall,confucion metircs
 
 #### Here is the information on this particular data set:
+**The "loan_status" column contains our label**
 
 <table border="1" class="dataframe">
   <thead>
@@ -92,7 +93,7 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
     <tr>
       <th>12</th>
       <td>loan_status</td>
-      <td>** Current status of the loan. This column contains our label**</td>
+      <td>Current status of the loan. This column contains our label</td>
     </tr>
     <tr>
       <th>13</th>
@@ -171,4 +172,10 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
     </tr>
   </tbody>
 </table>
+
+## 1. Data Exploration
+```python
+df.info()
+```
+
 
