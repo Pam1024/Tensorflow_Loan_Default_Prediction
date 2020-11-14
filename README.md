@@ -18,8 +18,8 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 
 **5. Model Performance Evaluation:** Plot out the validation loss versus the training loss, check precision,recall,confucion metircs
 
-#### Here is the information on this particular data set:
-**The "loan_status" column contains our label**
+*Here is the information on this particular data set:*
+*The "loan_status" column contains our label*
 
 <table border="1" class="dataframe">
   <thead>
@@ -174,8 +174,51 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 </table>
 
 ## 1. Data Exploration
+- Check the general information of data
 ```python
 df.info()
 ```
+- Since we will be attempting to predict loan_status, create a countplot of it
+```python
+sns.countplot(x='loan_status', data = df)
+```
+
+- Check the histogram of the loan_amnt column
+```python
+plt.figure(figsize=(10,5))
+sns.distplot(df['loan_amnt'],kde = False)
+```
+
+- Explore correlation between the continuous feature variables,visualize it using a heatmap
+``` python
+plt.figure(figsize = (10,10))
+correlation = df.corr()
+sns.heatmap(correlation,cmap = "viridis",annot=True)
+```
+
+- 'loan_amnt' and 'installment' have strong correlation, check the scatterplot of them
+```python
+plt.figure(figsize = (10,5))
+sns.scatterplot(y='loan_amnt',x='installment',data = df)
+```
+
+- Check the relationship between the loan_status and the loan_amnt using a boxplot
+```python
+sns.boxplot(x = 'loan_status', y = 'loan_amnt', data = df)
+```
+
+- Check the summary statistics for the loan amount in terms of loan_status
+
+```python
+df.groupby('loan_status')['loan_amnt'].describe()
+```
+
+- Check the Countplot of sub_grade in terms of loan_status
+```python
+plt.figure(figsize = (12,6))
+subgrade_order = sorted(df['sub_grade'].unique())
+sns.countplot(x ='sub_grade',data = df, order = subgrade_order, hue = 'loan_status',palette='coolwarm')
+```
+
 
 
