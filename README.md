@@ -207,18 +207,18 @@ sns.scatterplot(y='loan_amnt',x='installment',data = df)
 sns.boxplot(x = 'loan_status', y = 'loan_amnt', data = df)
 ```
 
-- Check the summary statistics for the loan amount in terms of loan_status
+- Check the summary statistics for the loan amount based on the loan_status label
 
 ```python
 df.groupby('loan_status')['loan_amnt'].describe()
 ```
 
-- Check the Countplot of sub_grade in terms of loan_status
+- Check the Countplot of sub_grade  based on the loan_status label
 ```python
 plt.figure(figsize = (12,6))
 subgrade_order = sorted(df['sub_grade'].unique())
 sns.countplot(x ='sub_grade',data = df, order = subgrade_order, hue = 'loan_status',palette='coolwarm')
 ```
 
-
+**More data exploration please refer to the python file**
 
