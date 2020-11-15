@@ -179,18 +179,20 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 df.info()
 ```
 
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/info.PNG ) <!-- .element  width="50%" -->
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/info.PNG) 
 
 - Since we will be attempting to predict loan_status, create a countplot of it
 ```python
 sns.countplot(x='loan_status', data = df)
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/countplot1.PNG) 
 
 - Check the histogram of the loan_amnt column
 ```python
 plt.figure(figsize=(10,5))
 sns.distplot(df['loan_amnt'],kde = False)
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/2histogram.PNG) 
 
 - Explore correlation between the continuous feature variables,visualize it using a heatmap
 ``` python
@@ -198,23 +200,27 @@ plt.figure(figsize = (10,10))
 correlation = df.corr()
 sns.heatmap(correlation,cmap = "viridis",annot=True)
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/3heatmap.PNG) 
 
 - 'loan_amnt' and 'installment' have strong correlation, check the scatterplot of them
 ```python
 plt.figure(figsize = (10,5))
 sns.scatterplot(y='loan_amnt',x='installment',data = df)
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/4scatterplot.PNG) 
 
 - Check the relationship between the loan_status and the loan_amnt using a boxplot
 ```python
 sns.boxplot(x = 'loan_status', y = 'loan_amnt', data = df)
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/5boxplot.PNG) 
 
 - Check the summary statistics for the loan amount based on the loan_status label
 
 ```python
 df.groupby('loan_status')['loan_amnt'].describe()
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/7summary_statistics.PNG) 
 
 - Check the Countplot of sub_grade  based on the loan_status label
 ```python
@@ -222,6 +228,7 @@ plt.figure(figsize = (12,6))
 subgrade_order = sorted(df['sub_grade'].unique())
 sns.countplot(x ='sub_grade',data = df, order = subgrade_order, hue = 'loan_status',palette='coolwarm')
 ```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/8barplot.PNG) 
 
 **More data exploration please refer to the python file**
 
