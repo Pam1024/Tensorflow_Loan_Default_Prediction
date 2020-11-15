@@ -18,6 +18,7 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 
 **5. Model Performance Evaluation:** Plot out the validation loss versus the training loss, check precision,recall,confucion metircs
 
+
 *Here is the information on this particular data set:*
 *The "loan_status" column contains our label*
 
@@ -228,16 +229,129 @@ plt.figure(figsize = (12,6))
 subgrade_order = sorted(df['sub_grade'].unique())
 sns.countplot(x ='sub_grade',data = df, order = subgrade_order, hue = 'loan_status',palette='coolwarm')
 ```
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/8barplot.PNG) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/8countplot.PNG) 
 
 **More data exploration please refer to the python file**
 
 
 ## 2. Data PreProcessing 
+- check the total count of missing values per column
+```python
+df.isnull().sum()
+```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/9missingvalue.PNG) 
+
+- Check how many unique employment job titles are there
+```python
+df['emp_title'].nunique()
+```
+the result is :173105, there are too many unique values, which is not very informative for the prediction, so drop this feature
+```python
+df = df.drop('emp_title', axis =1)
+```
+- Check which column is most highly correlates to mort_acc
+```python
+df.corr()['mort_acc'].sort_values()
+```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/10mort_acc_corr.png) 
+Looks like the total_acc feature correlates with the mort_acc ,fill in the missing mort_acc values based on their total_acc value.
+
+If the mort_acc is missing, then we will fill in that missing value with the mean value corresponding to its total_acc value
+
+```python
+dic = df.groupby('total_acc')['mort_acc'].mean().to_dict()
+def match_mort (x,y):
+    if np.isnan(x):
+        return dic[y]
+    else:
+        return x
+df['mort_acc']=df.apply(lambda x:match_mort(x['mort_acc'],x['total_acc']),axis=1)
+```
+- Deal with  Categorical Variables 
+List all the columns that are currently non-numeric
+```python
+df.select_dtypes('object').columns
+```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/11categorical_feature.png) 
+
+Deal with 'term' feature
+
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/12term_feature.png) 
+
+- Convert 'sub_grade' Categorical Variables to dummy variables
+
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/13sub_grade.png) 
+```python
+subgrade_dummies = pd.get_dummies(df['sub_grade'],drop_first=True)
+df = pd.concat([df.drop('sub_grade',axis=1),subgrade_dummies],axis=1)
+df.columns
+```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/14columns.png) 
+
+- Deal with 'address' feature
+Feature engineer a zip code column from the address in the data set. Create a column called 'zip_code' that extracts the zip code from the address column.
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/15zip_code.png) 
+
+**More data PreProcessing please refer to the python file**
 
 
 ## 3. Data Normalization
 
+- Train Test Split
+```python
+X = df.drop('loan_repaid',axis=1).values
+y = df['loan_repaid'].values
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=101)
+```
+- Normalizing the Data
+Use a MinMaxScaler to normalize the feature data X_train and X_test
+```python
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+X_train=scaler.fit_transform(X_train)
+X_test=scaler.transform(X_test)
+```
+
 ## 4. Neural Network Model Build
+```python
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,Dropout
+from tensorflow.keras.callbacks import EarlyStopping
+model = Sequential()
+
+#input layer
+model.add(Dense(units=78,activation='relu'))
+model.add(Dropout(0.2))
+
+#hidder layer
+model.add(Dense(units=39,activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(units=19,activation='relu'))
+model.add(Dropout(0.2))
+
+#binary_classification 
+#output layer
+model.add(Dense(units=1,activation='sigmoid'))
+
+#model compile
+model.compile(optimizer='adam',loss='binary_crossentropy')
+
+# add earlystop to prevent overfitting
+early_stop = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5)
+```
+fit the model
+```python
+model.fit(X_train,y_train,batch_size=256,epochs=50,validation_data=(X_test,y_test),callbacks=[early_stop])
+```
 
 ## 5. Model Performance Evaluation
+- check the how the losses of traing and testing envolve
+```python
+losses = pd.DataFrame(model.history.history)
+losses.plot()
+```
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/16lossesenvolve.png) 
+
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/17metrics.png) 
