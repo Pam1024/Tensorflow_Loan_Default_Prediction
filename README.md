@@ -25,7 +25,7 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>LoanStatNew</th>
+      <th>Features</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -222,3 +222,12 @@ sns.countplot(x ='sub_grade',data = df, order = subgrade_order, hue = 'loan_stat
 
 **More data exploration please refer to the python file**
 
+
+## 2. Data PreProcessing 
+
+
+## 3. Data Normalization
+
+## 4. Neural Network Model Build
+
+## 5. Model Performance Evaluation
