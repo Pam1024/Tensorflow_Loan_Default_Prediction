@@ -179,8 +179,8 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 df.info()
 ```
 
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/info.PNG){ width=50% }
-![info](../image/info.PNG){ width=50% }
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/info.PNG | width=100)
+![info](/../image/info.PNG){ width=50% }
 - Since we will be attempting to predict loan_status, create a countplot of it
 ```python
 sns.countplot(x='loan_status', data = df)
