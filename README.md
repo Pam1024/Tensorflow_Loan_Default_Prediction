@@ -179,7 +179,7 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 df.info()
 ```
 
-![info](../project%20plot/info.PNG)
+![info](../project plot/info.PNG)
 - Since we will be attempting to predict loan_status, create a countplot of it
 ```python
 sns.countplot(x='loan_status', data = df)
