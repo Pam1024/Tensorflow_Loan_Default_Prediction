@@ -9,19 +9,19 @@ Data can be downloaded from: https://drive.google.com/file/d/1vLF0ATXdvioYuFxAe_
 ### For this project, we completed below tasks
 
 #### 1. Data Exploration :
-      Get an understanding for which variables are important, view summary statistics, and visualize the data 
+   *Get an understanding for which variables are important, view summary statistics, and visualize the data 
 
 #### 2. Data PreProcessing :
-     Remove or fill any missing data. Remove unnecessary or repetitive features. Convert categorical string features to dummy variables
+   *Remove or fill any missing data. Remove unnecessary or repetitive features. Convert categorical string features to dummy variables
 
 #### 3. Data Normalization:
-     Use a MinMaxScaler to normalize the feature data X_train and X_test
+   *Use a MinMaxScaler to normalize the feature data X_train and X_test
 
 #### 4. Neural Network Model Build:
-     Use keras to build a sequential model to predict the label
+   *Use keras to build a sequential model to predict the label
 
 #### 5. Model Performance Evaluation:
-     Plot out the validation loss versus the training loss, check precision,recall,confucion metircs
+   *Plot out the validation loss versus the training loss, check precision,recall,confucion metircs
 
 
 *Here is the information on this particular data set:*
