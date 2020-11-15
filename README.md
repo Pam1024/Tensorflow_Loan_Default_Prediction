@@ -253,7 +253,7 @@ df = df.drop('emp_title', axis =1)
 ```python
 df.corr()['mort_acc'].sort_values()
 ```
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/10mort_acc_corr.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/10mort_acc_corr.PNG) 
 Looks like the total_acc feature correlates with the mort_acc ,fill in the missing mort_acc values based on their total_acc value.
 
 If the mort_acc is missing, then we will fill in that missing value with the mean value corresponding to its total_acc value
@@ -272,7 +272,7 @@ List all the columns that are currently non-numeric
 ```python
 df.select_dtypes('object').columns
 ```
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/11categorical_feature.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/11categorical_feature.PNG) 
 
 Deal with 'term' feature
 
@@ -280,17 +280,17 @@ Deal with 'term' feature
 
 - Convert 'sub_grade' Categorical Variables to dummy variables
 
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/13sub_grade.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/13sub_grade.PNG) 
 ```python
 subgrade_dummies = pd.get_dummies(df['sub_grade'],drop_first=True)
 df = pd.concat([df.drop('sub_grade',axis=1),subgrade_dummies],axis=1)
 df.columns
 ```
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/14columns.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/14columns.PNG) 
 
 - Deal with 'address' feature
 Feature engineer a zip code column from the address in the data set. Create a column called 'zip_code' that extracts the zip code from the address column.
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/15zip_code.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/15zip_code.PNG) 
 
 **More data PreProcessing please refer to the python file**
 
@@ -352,6 +352,6 @@ model.fit(X_train,y_train,batch_size=256,epochs=50,validation_data=(X_test,y_tes
 losses = pd.DataFrame(model.history.history)
 losses.plot()
 ```
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/16lossesenvolve.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/16lossesenvolve.PNG) 
 
-![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/17metrics.png) 
+![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/17metrics.PNG) 
