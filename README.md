@@ -254,6 +254,7 @@ df = df.drop('emp_title', axis =1)
 df.corr()['mort_acc'].sort_values()
 ```
 ![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/10mort_acc_corr.PNG) 
+
 Looks like the total_acc feature correlates with the mort_acc ,fill in the missing mort_acc values based on their total_acc value.
 
 If the mort_acc is missing, then we will fill in that missing value with the mean value corresponding to its total_acc value
@@ -313,6 +314,7 @@ X_test=scaler.transform(X_test)
 ```
 
 ## 4. Neural Network Model Build
+**build a a model that goes 78 --> 39 --> 19--> 1 output neuron with dropout layer**
 ```python
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -355,3 +357,5 @@ losses.plot()
 ![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/16lossesenvolve.PNG) 
 
 ![info](https://github.com/Pam1024/Tensorflow_Loan_Default_Prediction/blob/main/image/17metrics.PNG) 
+
+From above metrics, we can see that this model is good at predicting class'1', but not that good at predicting class'0'. The reason is that the inbalance of original dataset.
